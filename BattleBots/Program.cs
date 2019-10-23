@@ -4,13 +4,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Media;
+
 namespace BattleBots
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Write("hello");
+            //Starting Sound (Welcome to BATTLE BOTS) 
+
+
+
+
+            System.Media.SoundPlayer player4 = new System.Media.SoundPlayer(GameR.welcome_emma);
+
+            Console.WriteLine("Welcome to Battle Bots");
+            player4.Play();
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Console.ReadLine();
         }
     }
 }
