@@ -17,10 +17,10 @@ namespace BattleBots
 
 
 
-            System.Media.SoundPlayer player4 = new System.Media.SoundPlayer(GameR.welcome_emma);
-
-            Console.WriteLine("Welcome to Battle Bots");
+            System.Media.SoundPlayer player4 = new System.Media.SoundPlayer(GameR.Pokemon_Open);
             player4.Play();
+            Console.WriteLine("Welcome to Battle Bots");
+            
             
 
 
