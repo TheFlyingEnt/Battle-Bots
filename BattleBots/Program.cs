@@ -52,7 +52,7 @@ namespace BattleBots
             
             Console.WriteLine("\n Please type your Choice of Pokemon:");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n Pikachu: ## HP");
+            Console.WriteLine("\n Pikachu:## HP");
             Console.WriteLine("\n               ## Damage");
 
             Console.ForegroundColor = ConsoleColor.Blue;
