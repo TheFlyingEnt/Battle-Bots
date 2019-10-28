@@ -52,16 +52,16 @@ namespace BattleBots
             
             Console.WriteLine("\n Please type your Choice of Pokemon:");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n Pikachu:## HP");
-            Console.WriteLine("\n               ## Damage");
+            Console.WriteLine("\n Pikachu: ## Damage");
+            Console.WriteLine("\n     Weekness: Squirtle and Pidgey");
 
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("\n Squirtle: ## HP");
-            Console.WriteLine("\n               ## Damage");
+            Console.WriteLine("\n Squirtle: ## Damage");
+            Console.WriteLine("\n     Weekness: Swadloon and Geodude");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("\n Pidgey: ## HP");
-            Console.WriteLine("\n               ## Damage");
+            Console.WriteLine("\n Pidgey: ## Damage");
+            Console.WriteLine("\n     Weekness: Swadloon and Squirtle");
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("\n Geodude: ## HP");
@@ -71,9 +71,11 @@ namespace BattleBots
             Console.WriteLine("\n Swadloon: ## HP");
             Console.WriteLine("\n               ## Damage");
 
+            Console.ForegroundColor = ConsoleColor.White;
+
             string strUserBotChoice = Console.ReadLine();
             //User then Will Choice the "Bot"
-
+            
             // For Fightinging
             Console.WriteLine("\n Pokemon Name: ## HP");
             Console.WriteLine("\n               ## Damage");
