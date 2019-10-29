@@ -9,7 +9,7 @@ namespace BattleBots
     public class Player
     {
         private int score;
-        private int highScore;           // Instance Variables (also field)
+        private int highScore;
         private string name;
 
         public int Score
@@ -23,7 +23,6 @@ namespace BattleBots
                 score = value;
             }
         }
-
         public int HighScore
         {
             get
@@ -46,31 +45,25 @@ namespace BattleBots
                 name = value;
             }
         }
+
         public Player()
         {
-            name = "Ash";               // Defult Constructor
-
-
-
+            Name = "Joe";
         }
 
         public Player(string name)
         {
-            Name = name;                    // Overloaded Constructor
-
+            Name = name;
         }
 
         public void UpdateHighScore(int newScore)
         {
-
             HighScore = newScore > HighScore ? newScore : HighScore;
-             // Like an If then                 true       false
         }
-        public void GainPoint(int point)
-        {
-            score += point;
-        
 
+        public void GainPoints(int points)
+        {
+            score += points;
         }
     }
 }
