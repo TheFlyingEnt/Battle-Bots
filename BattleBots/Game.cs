@@ -51,26 +51,38 @@ namespace BattleBots
             public BattleBot PromptUserForBot()
             {
                 OpenSFX.Play();
-                // Plays Sound
-                Console.WriteLine("Do you want to enable the reading out of all the text?");
+            // Plays Sound
+            Console.WriteLine("\n CopyRight © The Pokemon Company");
+            Console.WriteLine("\n CopyRight © Nintendo \n");
+
+            Console.WriteLine("Do you want to enable the reading out of all the text?");
                 if (Console.ReadLine().Trim().ToLower()[0] != 'y')
                 {
                     SpeakingConsole.EnableSpeaking = false;
                 }
             OpenSFX.Stop();
             MeetOakSFX.Play();
-                SpeakingConsole.WriteLine("Welcome to Rock Paper Scissors Lizard Spock");
-
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            SpeakingConsole.WriteLine("Welcome to Rock Paper Scissors Lizard Spock");
+            Console.WriteLine("\n Press Enter...");
+            Console.ReadLine();
+            
                 SpeakingConsole.WriteLine("\n ...");
-
-                SpeakingConsole.WriteLine("\n  Opps, Wrong Program..");
-
-                SpeakingConsole.WriteLine("\n Welcome to Battle Bots");
-
-                SpeakingConsole.WriteLine("\n This is a Battle to the Dea... err of the Pokemon ");
-
-                SpeakingConsole.WriteLine("\n My name is Professor Oak, Welcome to the World of Pokemon");
-                SpeakingConsole.WriteLine("\n Professor Oak: what is your Name?");
+            Console.ReadLine();
+            SpeakingConsole.WriteLine("\n  Opps, Wrong Program..");
+            Console.ReadLine();
+            SpeakingConsole.WriteLine("\n Welcome to Battle Bots");
+            Console.ReadLine();
+            SpeakingConsole.WriteLine("\n This is a Battle to the Dea... err of the Pokemon ");
+            Console.ReadLine();
+            SpeakingConsole.WriteLine("\n My name is Professor Oak, Welcome to the World of Pokemon");
+            Console.ReadLine();
+            Console.WriteLine("\n This world is inhabited by creatures called pokémon!");
+            Console.WriteLine("\n For some people, pokémon are pets. Others use them for fights.");
+            Console.WriteLine("\n Myself...I study pokémon as a profession.");
+            Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            SpeakingConsole.WriteLine("\n Professor Oak: what is your Name?");
 
                 string strName = SpeakingConsole.ReadLine();
                 SpeakingConsole.WriteLine("\n Please choose a Pokemon:");
@@ -113,6 +125,7 @@ namespace BattleBots
       //////////////////////////////////////////////////////////////////
 
                 string strWeapon;
+            
                 while (((strWeapon = SpeakingConsole.ReadLine()) == "" || !IsValidWeapon(strWeapon)) && strName != "")
                 {
                     SpeakingConsole.WriteLine("Please enter a valid weapon from above");
@@ -135,6 +148,7 @@ namespace BattleBots
                 {
                     return new BattleBot();
                 }
+                
             }
 
             public void Battle(ref BattleBot battleBot)
@@ -151,16 +165,60 @@ namespace BattleBots
                     string computerWeapon = WEAPONS[rGen.Next(WEAPONS.Length)];
                 ///////////////////////////////////
 
-                SpeakingConsole.WriteLine("\n Pokemon Name: ## HP");
-                SpeakingConsole.WriteLine("\n               ");
+                    BattleBot w = new BattleBot();
 
-                SpeakingConsole.WriteLine("\n     ----- VS -----   ");
+                    if (w.Weapon == "Pickachu")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+                    else if (w.Weapon == "Geodude")
+                    {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                    else if (w.Weapon == "Squirtle")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                    else if (w.Weapon == "Swadloon")
+                    {
+                         Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (w.Weapon == "Pidgey")
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                              Console.WriteLine("███████████████████████████");
+                    SpeakingConsole.WriteLine("\n      " + w.Weapon + "           ");
+                Console.ForegroundColor = ConsoleColor.White;
+                    SpeakingConsole.WriteLine("\n     ----- VS -----   ");
+
+                if (computerWeapon == "Pikachu")
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                else if (computerWeapon == "Geodude")
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else if (computerWeapon == "Squirtle")
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                }
+                else if (computerWeapon == "Swadloon")
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else if (computerWeapon == "Pidgey")
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
 
 
-                SpeakingConsole.WriteLine("\n" + computerWeapon);    // Pokemon
-                SpeakingConsole.WriteLine("\n               ");
+                SpeakingConsole.WriteLine("\n       " + computerWeapon);    // Pokemon
+                Console.WriteLine("███████████████████████████");
 
-
+                Console.ForegroundColor = ConsoleColor.White;
                 //////////////////////////////////
                 //SpeakingConsole.WriteLine("\nYou are being attacked by a " + computerWeapon + ". What do you do?");
                 bool blnValidAction = false;
