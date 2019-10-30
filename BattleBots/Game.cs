@@ -10,64 +10,81 @@ using System.Timers;
 
 namespace BattleBots
 {
-    
 
-        public class Game
-        {
-            public const string WEAPON_CIRCULAR_SAW = "Pikachu";
-            public const string WEAPON_CLAW_CUTTER = "Squirtle";
-            public const string WEAPON_FLAME_THROWER = "Pidgey";
-            public const string WEAPON_SLEDGE_HAMMER = "Geodude";
-            public const string WEAPON_SPINNNING_BLADE = "Swadloon";
 
-            public static string[] WEAPONS = new string[] { WEAPON_CIRCULAR_SAW, WEAPON_CLAW_CUTTER, WEAPON_FLAME_THROWER, WEAPON_SLEDGE_HAMMER, WEAPON_SPINNNING_BLADE };
-            private static ConsoleKey[] KONAMI_CODE = new ConsoleKey[] { ConsoleKey.UpArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.DownArrow, ConsoleKey.LeftArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.RightArrow, ConsoleKey.B, ConsoleKey.A };
-            private System.Timers.Timer timer;
-            private Random rGen = new Random();
-            private int intTimeSinceGameStart;
-            private int intBattleStartTime;
-            private int intTimeElapsed;
+    public class Game
+    {
+        public const string WEAPON_CIRCULAR_SAW = "Pikachu";
+        public const string WEAPON_CLAW_CUTTER = "Squirtle";
+        public const string WEAPON_FLAME_THROWER = "Charmander";
+        public const string WEAPON_SLEDGE_HAMMER = "Geodude";
+        public const string WEAPON_SPINNNING_BLADE = "Bulbasaur";
 
-            System.Media.SoundPlayer OpenSFX = new System.Media.SoundPlayer(GameR.Pokemon_Open);
-            System.Media.SoundPlayer BattleSFX = new System.Media.SoundPlayer(GameR.Pokemon_Battle);
-            System.Media.SoundPlayer MeetOakSFX = new System.Media.SoundPlayer(GameR.Pokemon_MeetingOak);
+
+
+
+
+        public static string[] WEAPONS = new string[] { WEAPON_CIRCULAR_SAW, WEAPON_CLAW_CUTTER, WEAPON_FLAME_THROWER, WEAPON_SLEDGE_HAMMER, WEAPON_SPINNNING_BLADE };
+        public static ConsoleColor[] WEAPON_COLORS = new ConsoleColor[] { ConsoleColor.Yellow, ConsoleColor.Blue, ConsoleColor.DarkRed, ConsoleColor.Gray, ConsoleColor.Green };
+        public static string[] WEAPON_TYPES = new string[] { "Electric", "Water", "Flying", "Rock/Ground", "Grass" };
+
+
+        private static ConsoleKey[] KONAMI_CODE = new ConsoleKey[] { ConsoleKey.UpArrow, ConsoleKey.UpArrow, ConsoleKey.DownArrow, ConsoleKey.DownArrow, ConsoleKey.LeftArrow, ConsoleKey.RightArrow, ConsoleKey.LeftArrow, ConsoleKey.RightArrow, ConsoleKey.B, ConsoleKey.A };
+        private System.Timers.Timer timer;
+        private Random rGen = new Random();
+        private int intTimeSinceGameStart;
+        private int intBattleStartTime;
+        private int intTimeElapsed;
+
+        System.Media.SoundPlayer OpenSFX = new System.Media.SoundPlayer(GameR.Pokemon_Open);
+        System.Media.SoundPlayer BattleSFX = new System.Media.SoundPlayer(GameR.Pokemon_Battle);
+        System.Media.SoundPlayer MeetOakSFX = new System.Media.SoundPlayer(GameR.Pokemon_MeetingOak);
+        System.Media.SoundPlayer PokeBallOpenSFX = new System.Media.SoundPlayer(GameR.PokeBall);
+
+        System.Media.SoundPlayer PikaChuSFX = new System.Media.SoundPlayer(GameR.Thunderbolt_Pikachu);
+        System.Media.SoundPlayer BulbaSFX = new System.Media.SoundPlayer(GameR.VineWhip_Bluba);
+        System.Media.SoundPlayer GeodudeSFX = new System.Media.SoundPlayer(GameR.RockTomb_GeoDude);
+        System.Media.SoundPlayer CharSFX = new System.Media.SoundPlayer(GameR.Flamethrower_Charmader);
+        System.Media.SoundPlayer SquirtSFX = new System.Media.SoundPlayer(GameR.BubbleBeam_Squart);
+
 
         private bool blnIsBattleSoundPlaying = false;
 
-            public Game()
-            {
-                timer = new System.Timers.Timer();
-                timer.Enabled = true;
-                timer.Interval = 1000;
-                timer.Elapsed += Timer_Elapsed;
-            }
+        public Game()
+        {
+            timer = new System.Timers.Timer();
+            timer.Enabled = true;
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+        }
 
-            private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-            {
-                intTimeSinceGameStart++;
-                intTimeElapsed = intTimeSinceGameStart - intBattleStartTime;
-            }
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            intTimeSinceGameStart++;
+            intTimeElapsed = intTimeSinceGameStart - intBattleStartTime;
+        }
 
-            public BattleBot PromptUserForBot()
-            {
-                OpenSFX.Play();
+        public BattleBot PromptUserForBot()
+        {
+            OpenSFX.Play();
             // Plays Sound
-            Console.WriteLine("\n CopyRight © The Pokemon Company");
-            Console.WriteLine("\n CopyRight © Nintendo \n");
+            Console.WriteLine("\n Copyright (©) The Pokemon Company 2019");
+            Console.WriteLine("\n Copyright (©) Nintendo 2019");
+            Console.WriteLine("\n Copyright (©) MrLettsGiveUseAnA.Inc 2019\n");
 
             Console.WriteLine("Do you want to enable the reading out of all the text?");
-                if (Console.ReadLine().Trim().ToLower()[0] != 'y')
-                {
-                    SpeakingConsole.EnableSpeaking = false;
-                }
+            if (Console.ReadLine().Trim().ToLower()[0] != 'y')
+            {
+                SpeakingConsole.EnableSpeaking = false;
+            }
             OpenSFX.Stop();
-            MeetOakSFX.Play();
+            MeetOakSFX.PlayLooping();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             SpeakingConsole.WriteLine("Welcome to Rock Paper Scissors Lizard Spock");
             Console.WriteLine("\n Press Enter...");
             Console.ReadLine();
-            
-                SpeakingConsole.WriteLine("\n ...");
+
+            SpeakingConsole.WriteLine("\n ...");
             Console.ReadLine();
             SpeakingConsole.WriteLine("\n  Opps, Wrong Program..");
             Console.ReadLine();
@@ -84,277 +101,350 @@ namespace BattleBots
             Console.ForegroundColor = ConsoleColor.White;
             SpeakingConsole.WriteLine("\n Professor Oak: what is your Name?");
 
-                string strName = SpeakingConsole.ReadLine();
-                SpeakingConsole.WriteLine("\n Please choose a Pokemon:");
+            string strName = SpeakingConsole.ReadLine();
+            SpeakingConsole.WriteLine("\n Please choose a Pokemon:");
 
-                //foreach (string weapon in WEAPONS)
-                //{
-                //string[] beatableWeapons = Array.FindAll(WEAPONS, w => CanBeat(weapon, w));
-                //SpeakingConsole.WriteLine("\n" + weapon + " Beats " + String.Join(" And ", beatableWeapons));
-                //}
+            //foreach (string weapon in WEAPONS)
+            //{
+            //string[] beatableWeapons = Array.FindAll(WEAPONS, w => CanBeat(weapon, w));
+            //SpeakingConsole.WriteLine("\n" + weapon + " Beats " + String.Join(" And ", beatableWeapons));
+            //}
 
-       ///////////////////////////////////////////////////////////////////////
-                Console.WriteLine("\n Please type your Choice of Pokemon:");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\n Pikachu: Electric");
-                Console.WriteLine("\n     Strengths: Squirtle and Pidgey");
-                Console.WriteLine("\n     Weekness: Geodude and Swadloon");
+            ///////////////////////////////////////////////////////////////////////
+            //Console.WriteLine("\n Please type your Choice of Pokemon:");
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.WriteLine("\n Pikachu: Electric");
+            //Console.WriteLine("\n     Strengths: Squirtle and Pidgey");
+            //Console.WriteLine("\n     Weekness: Geodude and Swadloon");
 
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("\n Squirtle: Water");
-                Console.WriteLine("\n     Strengths: Swadloon and Geodude");
-                Console.WriteLine("\n     Weekness: Pickachu and Pidgey");
+            //Console.ForegroundColor = ConsoleColor.Blue;
+            //Console.WriteLine("\n Squirtle: Water");
+            //Console.WriteLine("\n     Strengths: Swadloon and Geodude");
+            //Console.WriteLine("\n     Weekness: Pickachu and Pidgey");
 
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n Pidgey: Flying");
-                Console.WriteLine("\n     Strengths: Squirtle and Swadloon");
-                Console.WriteLine("\n     Weekness: Pickachu and Geodude");
+            //Console.ForegroundColor = ConsoleColor.DarkRed;
+            //Console.WriteLine("\n Charmander: Fire");
+            //Console.WriteLine("\n     Strengths: Squirtle and Swadloon");
+            //Console.WriteLine("\n     Weekness: Pickachu and Geodude");
 
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("\n Geodude: Rock/Ground");
-                Console.WriteLine("\n     Strengths: Pikachu and Pidgey");
-                Console.WriteLine("\n     Weekness: Swadloon and Squirtle");
+            //Console.ForegroundColor = ConsoleColor.Gray;
+            //Console.WriteLine("\n Geodude: Rock/Ground");
+            //Console.WriteLine("\n     Strengths: Pikachu and Pidgey");
+            //Console.WriteLine("\n     Weekness: Swadloon and Squirtle");
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n Swadloon: Bug/Grass");
-                Console.WriteLine("\n     Strengths: Geodude and Pikachu");
-                Console.WriteLine("\n     Weekness: Squirtle and Pidgey");
+            //Console.ForegroundColor = ConsoleColor.Green;
+            //Console.WriteLine("\n Bulbasaur: Grass");
+            //Console.WriteLine("\n     Strengths: Geodude and Pikachu");
+            //Console.WriteLine("\n     Weekness: Squirtle and Pidgey");
 
-                Console.ForegroundColor = ConsoleColor.White;
+            SpeakingConsole.WriteLine("\nPlease choose a Pokemon from the following:");
 
-      //////////////////////////////////////////////////////////////////
+            foreach (string weapon in WEAPONS)
+            {
+                string[] beatableWeapons = Array.FindAll(WEAPONS, w => CanBeat(weapon, w));
+                string[] unbeatableWeapons = Array.FindAll(WEAPONS, w => (!CanBeat(weapon, w)) && w != weapon);
 
-                string strWeapon;
+                Console.ForegroundColor = GetColorForWeapon(weapon);
+                SpeakingConsole.WriteLine("\n " + weapon + ": " + GetTypeForWeapon(weapon));
+                SpeakingConsole.WriteLine("\n     Strengths: " + string.Join(" And ", beatableWeapons));
+                SpeakingConsole.WriteLine("\n     Weekness: " + string.Join(" And ", unbeatableWeapons));
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+
+            //////////////////////////////////////////////////////////////////
+
+            string strWeapon;
+
+            while (((strWeapon = SpeakingConsole.ReadLine()) == "" || !IsValidWeapon(strWeapon)) && strName != "")
+            {
+                SpeakingConsole.WriteLine("Please enter a valid weapon from above");
+            }
+            MeetOakSFX.Stop();
             
-                while (((strWeapon = SpeakingConsole.ReadLine()) == "" || !IsValidWeapon(strWeapon)) && strName != "")
+            timer.Start();
+            intTimeSinceGameStart = 0;
+            if (IsValidWeapon(strWeapon))
+            {
+                if (strName != "")
                 {
-                    SpeakingConsole.WriteLine("Please enter a valid weapon from above");
-                }
-                MeetOakSFX.Stop();
-                timer.Start();
-                intTimeSinceGameStart = 0;
-                if (IsValidWeapon(strWeapon))
-                {
-                    if (strName != "")
-                    {
-                        return new BattleBot(strName, GetValidWeaponName(strWeapon));
-                    }
-                    else
-                    {
-                        return new BattleBot(GetValidWeaponName(strWeapon));
-                    }
+                    return new BattleBot(strName, GetValidWeaponName(strWeapon));
                 }
                 else
                 {
-                    return new BattleBot();
+                    return new BattleBot(GetValidWeaponName(strWeapon));
                 }
-                
+            }
+            else
+            {
+                return new BattleBot();
             }
 
-            public void Battle(ref BattleBot battleBot)
+        }
+
+        public void Battle(ref BattleBot battleBot)
+        {
+            if (!blnIsBattleSoundPlaying)
             {
-                if (!blnIsBattleSoundPlaying)
-                {
-                    BattleSFX.PlayLooping();
-                    blnIsBattleSoundPlaying = true;
-                }
+                BattleSFX.PlayLooping();
+                blnIsBattleSoundPlaying = true;
+            }
+            
+            if (battleBot.FuelLevel > 0 && battleBot.ConditionLevel > 0)
+            {
+                intBattleStartTime = intTimeSinceGameStart;
+                string computerWeapon = WEAPONS[rGen.Next(WEAPONS.Length)];
+                //////////////////////////////////
+                Console.ForegroundColor = GetColorForWeapon(battleBot.Weapon);
+                Console.WriteLine("███████████████████████████");
+                SpeakingConsole.WriteLine("\n\t\t" + battleBot.Weapon + "           ");
 
-                if (battleBot.FuelLevel > 0 && battleBot.ConditionLevel > 0)
-                {
-                    intBattleStartTime = intTimeSinceGameStart;
-                    string computerWeapon = WEAPONS[rGen.Next(WEAPONS.Length)];
-                ///////////////////////////////////
-
-                    BattleBot w = new BattleBot();
-
-                    if (w.Weapon == "Pickachu")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                    }
-                    else if (w.Weapon == "Geodude")
-                    {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
-                    else if (w.Weapon == "Squirtle")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                    }
-                    else if (w.Weapon == "Swadloon")
-                    {
-                         Console.ForegroundColor = ConsoleColor.Green;
-                    }
-                    else if (w.Weapon == "Pidgey")
-                    {
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-
-                              Console.WriteLine("███████████████████████████");
-                    SpeakingConsole.WriteLine("\n      " + w.Weapon + "           ");
                 Console.ForegroundColor = ConsoleColor.White;
-                    SpeakingConsole.WriteLine("\n     ----- VS -----   ");
+                SpeakingConsole.WriteLine("\n\t\t----- VS -----   ");
 
-                if (computerWeapon == "Pikachu")
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                }
-                else if (computerWeapon == "Geodude")
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
-                else if (computerWeapon == "Squirtle")
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                }
-                else if (computerWeapon == "Swadloon")
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                }
-                else if (computerWeapon == "Pidgey")
-                {
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-
-
-                SpeakingConsole.WriteLine("\n       " + computerWeapon);    // Pokemon
+                Console.ForegroundColor = GetColorForWeapon(computerWeapon);
+                SpeakingConsole.WriteLine("\n\t\t" + computerWeapon);    // Pokemon
                 Console.WriteLine("███████████████████████████");
 
                 Console.ForegroundColor = ConsoleColor.White;
                 //////////////////////////////////
                 //SpeakingConsole.WriteLine("\nYou are being attacked by a " + computerWeapon + ". What do you do?");
                 bool blnValidAction = false;
-                    char charReadKey = '\0';
-                    while (!blnValidAction)
+                char charReadKey = '\0';
+                while (!blnValidAction)
+                {
+                    bool blnCheatCodeWorked = false;
+                    SpeakingConsole.WriteLine("\nAttack, Defend, or Retreat");
+                    for (int i = 0; i < KONAMI_CODE.Length; i++)
                     {
-                        bool blnCheatCodeWorked = false;
-                        SpeakingConsole.WriteLine("\nAttack, Defend, or Retreat");
-                        for (int i = 0; i < KONAMI_CODE.Length; i++)
+                        ConsoleKeyInfo key = Console.ReadKey();
+                        charReadKey = key.KeyChar;
+                        if (key.Key != KONAMI_CODE[i])
                         {
-                            ConsoleKeyInfo key = Console.ReadKey();
-                            charReadKey = key.KeyChar;
-                            if (key.Key != KONAMI_CODE[i])
-                            {
-                                break;
-                            }
-                            if (i == KONAMI_CODE.Length - 1)
-                            {
-                                battleBot.GainPoints(20);
-                                SpeakingConsole.WriteLine("\nYou have cheated, trainer!! But you will get 20 extra points because that's just how the world is (unfair)");
-                                blnCheatCodeWorked = true;
-                            }
+                            break;
                         }
-                        if (blnCheatCodeWorked)
-                            continue;
-
-                        string strAction = SpeakingConsole.SpeakAndReturn(charReadKey + Console.ReadLine());
-                        switch (strAction.Trim().ToLower())
+                        if (i == KONAMI_CODE.Length - 1)
                         {
-                            case "attack":
-                                blnValidAction = true;
-                                if (CanBeat(battleBot.Weapon, computerWeapon))
+                            battleBot.GainPoints(20);
+                            SpeakingConsole.WriteLine("\nYou have cheated, trainer!! But you will get 20 extra points because that's just how the world is (unfair)");
+                            PokeBallOpenSFX.PlaySync();
+                            
+                            blnCheatCodeWorked = true;
+                            BattleSFX.PlayLooping();
+                        }
+                    }
+                    if (blnCheatCodeWorked)
+                        continue;
+
+                    string strAction = SpeakingConsole.SpeakAndReturn(charReadKey + Console.ReadLine());
+                    switch (strAction.Trim().ToLower())
+                    {
+                        case "attack":
+                            blnValidAction = true;
+                            if (CanBeat(battleBot.Weapon, computerWeapon))
+                            {
+                                if (IsCriticalTo(battleBot.Weapon, computerWeapon))
+                                {
+                                    battleBot.GainPoints(rGen.Next(6, 11));
+                                    SpeakingConsole.WriteLine("You have critically destroyed your opponent!!");
+                                    //////////////////////////////////
+                                    ///////////////////////////////////
+                                    /////////////////////////////////
+                                }
+                                else
                                 {
                                     battleBot.GainPoints(5);
                                     SpeakingConsole.WriteLine("You have destroyed your opponent!!");
                                 }
+                            }
+                            else
+                            {
+                                if (IsCriticalTo(battleBot.Weapon, computerWeapon))
+                                {
+                                    battleBot.HandleDamage(rGen.Next(6, 11));
+                                    SpeakingConsole.WriteLine("You have tragically lost!!");
+                                }
                                 else
                                 {
                                     battleBot.HandleDamage(5);
-                                    SpeakingConsole.WriteLine("You have tragically lost!!");
+                                    SpeakingConsole.WriteLine("You have lost!!");
                                 }
-                                battleBot.ConsumeFuel(2 * intTimeElapsed);
-                                break;
-                            case "defend":
-                                blnValidAction = true;
-                                if (CanBeat(battleBot.Weapon, computerWeapon))
+                            }
+                            battleBot.ConsumeFuel(2 * intTimeElapsed);
+                            break;
+                        case "defend":
+                            blnValidAction = true;
+                            if (CanBeat(battleBot.Weapon, computerWeapon))
+                            {
+                                battleBot.GainPoints(2);
+                                SpeakingConsole.WriteLine("You have defended yourself like a noble man!!");
+                            }
+                            else
+                            {
+                                if (IsCriticalTo(battleBot.Weapon, computerWeapon))
                                 {
-                                    battleBot.GainPoints(2);
-                                    SpeakingConsole.WriteLine("You have defended yourself like a noble man!!");
+                                    battleBot.HandleDamage(rGen.Next(3, 5));
+                                    SpeakingConsole.WriteLine("Whoops, your shield has completely failed!!");
                                 }
                                 else
                                 {
                                     battleBot.HandleDamage(2);
                                     SpeakingConsole.WriteLine("Whoops, your shield has failed!!");
                                 }
-                                battleBot.ConsumeFuel(intTimeElapsed);
-                                break;
-                            case "retreat":
+                            }
+                            battleBot.ConsumeFuel(intTimeElapsed);
+                            break;
+                        case "retreat":
+                            blnValidAction = true;
+                            if (rGen.Next(0, 4) == 0)
+                            {
+                                SpeakingConsole.WriteLine("Unfortunately, you couldn't escape in time!!");
+                                battleBot.HandleDamage(7);
+                            }
+                            else
+                            {
+                                SpeakingConsole.WriteLine("You have succesfully escaped from the battle like a coward!! No points for you!!");
+                            }
+                            battleBot.ConsumeFuel(3 * intTimeElapsed);
+                            break;
+                        case "absorb":
+                            if (battleBot.Weapon == computerWeapon)
+                            {
                                 blnValidAction = true;
-                                if (rGen.Next(0, 4) == 0)
-                                {
-                                    SpeakingConsole.WriteLine("Unfortunately, you couldn't escape in time!!");
-                                    battleBot.HandleDamage(7);
-                                }
-                                else
-                                {
-                                    SpeakingConsole.WriteLine("You have succesfully escaped from the battle like a coward!! No points for you!!");
-                                }
-                                battleBot.ConsumeFuel(3 * intTimeElapsed);
-                                break;
-                            case "absorb":
-                                if (battleBot.Weapon == computerWeapon)
-                                {
-                                    blnValidAction = true;
-                                    SpeakingConsole.WriteLine("You have succesfully absorbed the opponent's power!!");
-                                    battleBot.Refuel(10);
-                                    battleBot.Heal(10);
-                                }
-                                break;
-                        }
-
+                                SpeakingConsole.WriteLine("You have succesfully absorbed the opponent's power!! This tastes yummy OwO");
+                                battleBot.Refuel(10);
+                                battleBot.Heal(10);
+                            }
+                            break;
                     }
-                    Thread.Sleep(1000);
-                    SpeakingConsole.WriteLine("\nBot stats:\nName: " + battleBot.Name + ",\nWeapon: " + battleBot.Weapon + ",\nCondition Level: " + battleBot.ConditionLevel + ",\nFuel Level: " + battleBot.FuelLevel + ",\nTurn Time: " + intTimeElapsed + ",\nTotal Battle Time: " + intTimeSinceGameStart + ",\nPoints: " + battleBot.Score + ",\nHighest Score: " + battleBot.HighScore);
-                    Thread.Sleep(1000);
+
+                }
+                Thread.Sleep(1000);
+                SpeakingConsole.WriteLine("\nBot stats:");
+
+                SpeakingConsole.WriteLine("Trainers Name: " + battleBot.Name + ",");
+
+                // Color Desider
+                if (battleBot.Weapon == "Pickachu")
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                else if (battleBot.Weapon == "Geodude")
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else if (battleBot.Weapon == "Squirtle")
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                }
+                else if (battleBot.Weapon == "Swadloon")
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else if (battleBot.Weapon == "Charmander")
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                }
+
+
+
+
+                SpeakingConsole.WriteLine("Pokemon: " + battleBot.Weapon + ",");
+                Console.ForegroundColor = ConsoleColor.White;
+                SpeakingConsole.WriteLine("Condition Level: " + battleBot.ConditionLevel + ",");
+                SpeakingConsole.WriteLine("Power Points:" + battleBot.FuelLevel + ",\nTurn Time: " + intTimeElapsed + ",\nTotal Battle Time: " + intTimeSinceGameStart + ",\nPoints: " + battleBot.Score + ",\nHighest Score: " + battleBot.HighScore);
+
+                SpeakingConsole.WriteLine("\n Health Left: ##");
+                SpeakingConsole.WriteLine("\n Power Left: ");
+                //Console.WriteLine("\n Next Move: ");
+
+                Thread.Sleep(1000);
+                Battle(ref battleBot);
+            }
+            else
+            {
+                battleBot.UpdateHighScore(battleBot.Score);
+                SpeakingConsole.WriteLine("Your pokemon has lost. Do you want to play again?");
+                if (SpeakingConsole.ReadLine().Trim().ToLower()[0] == 'y')
+                {
+                    battleBot = PromptUserForBot();
                     Battle(ref battleBot);
                 }
-                else
-                {
-                    battleBot.UpdateHighScore(battleBot.Score);
-                    SpeakingConsole.WriteLine("Your bot has lost. Do you want to play again?");
-                    if (SpeakingConsole.ReadLine().Trim().ToLower()[0] == 'y')
-                    {
-                        battleBot = PromptUserForBot();
-                        Battle(ref battleBot);
-                    }
-                }
             }
+        }
 
-            private static bool CanBeat(string weapon, string otherWeapon)
+        private static bool CanBeat(string weapon, string otherWeapon)
+        {
+            switch (weapon)
             {
-                switch (weapon)
-                {
-                    case WEAPON_CIRCULAR_SAW:
-                        if (otherWeapon == WEAPON_CLAW_CUTTER || otherWeapon == WEAPON_FLAME_THROWER)
-                            return true;
-                        break;
-                    case WEAPON_SLEDGE_HAMMER:
-                        if (otherWeapon == WEAPON_SPINNNING_BLADE || otherWeapon == WEAPON_CIRCULAR_SAW)
-                            return true;
-                        break;
-                    case WEAPON_SPINNNING_BLADE:
-                        if (otherWeapon == WEAPON_CIRCULAR_SAW || otherWeapon == WEAPON_FLAME_THROWER)
-                            return true;
-                        break;
-                    case WEAPON_CLAW_CUTTER:
-                        if (otherWeapon == WEAPON_SLEDGE_HAMMER || otherWeapon == WEAPON_SPINNNING_BLADE)
-                            return true;
-                        break;
-                    case WEAPON_FLAME_THROWER:
-                        if (otherWeapon == WEAPON_SLEDGE_HAMMER || otherWeapon == WEAPON_CLAW_CUTTER)
-                            return true;
-                        break;
-                }
-                return false;
+                case WEAPON_CIRCULAR_SAW:
+                    if (otherWeapon == WEAPON_CLAW_CUTTER || otherWeapon == WEAPON_FLAME_THROWER)
+                        return true;
+                    break;
+                case WEAPON_SLEDGE_HAMMER:
+                    if (otherWeapon == WEAPON_SPINNNING_BLADE || otherWeapon == WEAPON_CIRCULAR_SAW)
+                        return true;
+                    break;
+                case WEAPON_SPINNNING_BLADE:
+                    if (otherWeapon == WEAPON_CIRCULAR_SAW || otherWeapon == WEAPON_FLAME_THROWER)
+                        return true;
+                    break;
+                case WEAPON_CLAW_CUTTER:
+                    if (otherWeapon == WEAPON_SLEDGE_HAMMER || otherWeapon == WEAPON_SPINNNING_BLADE)
+                        return true;
+                    break;
+                case WEAPON_FLAME_THROWER:
+                    if (otherWeapon == WEAPON_SLEDGE_HAMMER || otherWeapon == WEAPON_CLAW_CUTTER)
+                        return true;
+                    break;
             }
+            return false;
+        }
 
-            private static bool IsValidWeapon(string weapon)
-            {
-                return Array.FindIndex(WEAPONS, s => weapon.Trim().ToLower() == s.Trim().ToLower()) != -1;
-            }
+        private static bool IsValidWeapon(string weapon)
+        {
+            return Array.FindIndex(WEAPONS, s => weapon.Trim().ToLower() == s.Trim().ToLower()) != -1;
+        }
 
-            private static string GetValidWeaponName(string weapon)
+        private static string GetValidWeaponName(string weapon)
+        {
+            return Array.Find(WEAPONS, s => weapon.Trim().ToLower() == s.Trim().ToLower());
+        }
+        private static ConsoleColor GetColorForWeapon(string weapon)
+        {
+            return WEAPON_COLORS[Array.FindIndex(WEAPONS, s => weapon.Trim().ToLower() == s.Trim().ToLower())];
+        }
+
+        private static string GetTypeForWeapon(string weapon)
+        {
+            return WEAPON_TYPES[Array.FindIndex(WEAPONS, s => weapon.Trim().ToLower() == s.Trim().ToLower())];
+        }
+
+        private static bool IsCriticalTo(string weapon, string otherWeapon)
+        {
+            switch (weapon)
             {
-                return Array.Find(WEAPONS, s => weapon.Trim().ToLower() == s.Trim().ToLower());
+                case WEAPON_CIRCULAR_SAW:
+                    if (otherWeapon == WEAPON_FLAME_THROWER)
+                        return true;
+                    break;
+                case WEAPON_CLAW_CUTTER:
+                    if (otherWeapon == WEAPON_SPINNNING_BLADE)
+                        return true;
+                    break;
+                case WEAPON_FLAME_THROWER:
+                    if (otherWeapon == WEAPON_CLAW_CUTTER)
+                        return true;
+                    break;
+                case WEAPON_SLEDGE_HAMMER:
+                    if (otherWeapon == WEAPON_SPINNNING_BLADE)
+                        return true;
+                    break;
+                case WEAPON_SPINNNING_BLADE:
+                    if (otherWeapon == WEAPON_CIRCULAR_SAW)
+                        return true;
+                    break;
             }
+            return false;
         }
 
 
@@ -366,9 +456,20 @@ namespace BattleBots
 
 
 
+    }
 
 
 
 
-     
+
+
+
+
+
+
+
+
+
+
+
 }

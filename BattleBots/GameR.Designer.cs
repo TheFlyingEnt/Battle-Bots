@@ -117,9 +117,27 @@ namespace BattleBots {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BubbleBeam_Squart {
+            get {
+                return ResourceManager.GetStream("BubbleBeam_Squart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream commandUnrecognized_emma {
             get {
                 return ResourceManager.GetStream("commandUnrecognized_emma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Flamethrower_Charmader {
+            get {
+                return ResourceManager.GetStream("Flamethrower_Charmader", resourceCulture);
             }
         }
         
@@ -162,6 +180,15 @@ namespace BattleBots {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream PokeBall {
+            get {
+                return ResourceManager.GetStream("PokeBall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream Pokemon_Battle {
             get {
                 return ResourceManager.GetStream("Pokemon_Battle", resourceCulture);
@@ -198,6 +225,15 @@ namespace BattleBots {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream RockTomb_GeoDude {
+            get {
+                return ResourceManager.GetStream("RockTomb_GeoDude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream shutdown {
             get {
                 return ResourceManager.GetStream("shutdown", resourceCulture);
@@ -210,6 +246,24 @@ namespace BattleBots {
         internal static System.IO.UnmanagedMemoryStream startup {
             get {
                 return ResourceManager.GetStream("startup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Thunderbolt_Pikachu {
+            get {
+                return ResourceManager.GetStream("Thunderbolt_Pikachu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream VineWhip_Bluba {
+            get {
+                return ResourceManager.GetStream("VineWhip_Bluba", resourceCulture);
             }
         }
         

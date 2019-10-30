@@ -172,4 +172,22 @@
   <data name="welcome_emma" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\welcome_emma.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="BubbleBeam_Squart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\BubbleBeam_Squart.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Flamethrower_Charmader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Flamethrower_Charmader.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PokeBall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\PokeBall.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RockTomb_GeoDude" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\RockTomb_GeoDude.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Thunderbolt_Pikachu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Thunderbolt_Pikachu.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="VineWhip_Bluba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\VineWhip_Bluba.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

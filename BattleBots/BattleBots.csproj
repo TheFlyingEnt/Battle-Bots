@@ -136,5 +136,23 @@
   <ItemGroup>
     <None Include="Resources\Pokemon_Open.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PokeBall.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thunderbolt_Pikachu.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RockTomb_GeoDude.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VineWhip_Bluba.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BubbleBeam_Squart.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flamethrower_Charmader.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
