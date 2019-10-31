@@ -341,7 +341,7 @@ namespace BattleBots
 
                 SpeakingConsole.WriteLine("Trainers Name: " + battleBot.Name + ",");
 
-                // Color Desider
+                // Color Desiders
                 if (battleBot.Weapon == "Pickachu")
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
