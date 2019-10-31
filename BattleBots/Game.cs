@@ -68,7 +68,7 @@ namespace BattleBots
             intTimeElapsed = intTimeSinceGameStart - intBattleStartTime;
         }
 
-        public BattleBot PromptUserForBot()
+        public BattleBot PromptUserForBot(int highScore)
         {
             OpenSFX.Play();
             // Plays Sound
@@ -107,6 +107,12 @@ namespace BattleBots
             SpeakingConsole.WriteLine("\n Professor Oak: what is your Name?");
 
             string strName = SpeakingConsole.ReadLine();
+
+
+
+
+            
+
             SpeakingConsole.WriteLine("\n Please choose a Pokemon:");
 
             //foreach (string weapon in WEAPONS)
@@ -156,6 +162,7 @@ namespace BattleBots
             }
             Console.ForegroundColor = ConsoleColor.White;
 
+
             //////////////////////////////////////////////////////////////////
 
             string strWeapon;
@@ -168,22 +175,24 @@ namespace BattleBots
             
             timer.Start();
             intTimeSinceGameStart = 0;
+            BattleBot result;
             if (IsValidWeapon(strWeapon))
             {
                 if (strName != "")
                 {
-                    return new BattleBot(strName, GetValidWeaponName(strWeapon));
+                    result = new BattleBot(strName, GetValidWeaponName(strWeapon));
                 }
                 else
                 {
-                    return new BattleBot(GetValidWeaponName(strWeapon));
+                    result = new BattleBot(GetValidWeaponName(strWeapon));
                 }
             }
             else
             {
-                return new BattleBot();
+                result = new BattleBot();
             }
-
+            result.UpdateHighScore(highScore);
+            return result;
         }
 
         public void Battle(ref BattleBot battleBot)
@@ -250,7 +259,7 @@ namespace BattleBots
                                 if (IsCriticalTo(battleBot.Weapon, computerWeapon))
                                 {
                                     battleBot.GainPoints(rGen.Next(6, 11));
-                                    SpeakingConsole.WriteLine("You have critically destroyed your opponent!!");
+                                    SpeakingConsole.WriteLine("Professor Oak: You have critically destroyed your opponent!!");
                                    
                                     //////////////////////////////////
                                     ///////////////////////////////////
@@ -259,7 +268,7 @@ namespace BattleBots
                                 else
                                 {
                                     battleBot.GainPoints(5);
-                                    SpeakingConsole.WriteLine("You have destroyed your opponent!!");
+                                    SpeakingConsole.WriteLine("Professor Oak: You have destroyed your opponent!!");
                                 }
                             }
                             else
@@ -267,12 +276,12 @@ namespace BattleBots
                                 if (IsCriticalTo(battleBot.Weapon, computerWeapon))
                                 {
                                     battleBot.HandleDamage(rGen.Next(6, 11));
-                                    SpeakingConsole.WriteLine("You have tragically lost!!");
+                                    SpeakingConsole.WriteLine("Professor Oak: You have tragically lost!!");
                                 }
                                 else
                                 {
                                     battleBot.HandleDamage(5);
-                                    SpeakingConsole.WriteLine("You have lost!!");
+                                    SpeakingConsole.WriteLine("Professor Oak: You have lost!!");
                                 }
                             }
                             battleBot.ConsumeFuel(2 * intTimeElapsed);
@@ -282,19 +291,19 @@ namespace BattleBots
                             if (CanBeat(battleBot.Weapon, computerWeapon))
                             {
                                 battleBot.GainPoints(2);
-                                SpeakingConsole.WriteLine("You have defended yourself like a noble man!!");
+                                SpeakingConsole.WriteLine("Professor Oak: You have defended yourself like a noble man!!");
                             }
                             else
                             {
                                 if (IsCriticalTo(battleBot.Weapon, computerWeapon))
                                 {
                                     battleBot.HandleDamage(rGen.Next(3, 5));
-                                    SpeakingConsole.WriteLine("Whoops, your shield has completely failed!!");
+                                    SpeakingConsole.WriteLine("Professor Oak: Whoops, your shield has completely failed!!");
                                 }
                                 else
                                 {
                                     battleBot.HandleDamage(2);
-                                    SpeakingConsole.WriteLine("Whoops, your shield has failed!!");
+                                    SpeakingConsole.WriteLine("Professor Oak: Whoops, your shield has failed!!");
                                 }
                             }
                             battleBot.ConsumeFuel(intTimeElapsed);
@@ -303,12 +312,12 @@ namespace BattleBots
                             blnValidAction = true;
                             if (rGen.Next(0, 4) == 0)
                             {
-                                SpeakingConsole.WriteLine("Unfortunately, you couldn't escape in time!!");
+                                SpeakingConsole.WriteLine("Professor Oak: Unfortunately, you couldn't escape in time!!");
                                 battleBot.HandleDamage(7);
                             }
                             else
                             {
-                                SpeakingConsole.WriteLine("You have succesfully escaped from the battle like a coward!! No points for you!!");
+                                SpeakingConsole.WriteLine("Professor Oak: You have succesfully escaped from the battle like a coward!! No points for you!!");
                             }
                             battleBot.ConsumeFuel(3 * intTimeElapsed);
                             break;
@@ -317,6 +326,7 @@ namespace BattleBots
                             {
                                 blnValidAction = true;
                                 SpeakingConsole.WriteLine("You have succesfully absorbed the opponent's power!! This tastes yummy OwO");
+                                SpeakingConsole.WriteLine("Professor Oak: Mmmmm... Fried " + computerWeapon);
                                 battleBot.Refuel(10);
                                 battleBot.Heal(10);
                             }
@@ -339,6 +349,31 @@ namespace BattleBots
                 Thread.Sleep(1000);
                 SpeakingConsole.WriteLine("\nBot stats:");
 
+                if (battleBot.Name == "PokeBall")
+                {
+                    Console.WriteLine("────────▄███████████▄────────");
+                    Console.WriteLine("─────▄███▓▓▓▓▓▓▓▓▓▓▓███▄─────");
+                    Console.WriteLine("────███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███────");
+                    Console.WriteLine("───██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██───");
+                    Console.WriteLine("──██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██──");
+                    Console.WriteLine("─██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██─");
+                    Console.WriteLine("██▓▓▓▓▓▓▓▓▓███████▓▓▓▓▓▓▓▓▓██");
+                    Console.WriteLine("██▓▓▓▓▓▓▓▓██░░░░░██▓▓▓▓▓▓▓▓██");
+                    Console.WriteLine("██▓▓▓▓▓▓▓██░░███░░██▓▓▓▓▓▓▓██");
+                    Console.WriteLine("███████████░░███░░███████████");
+                    Console.WriteLine("██░░░░░░░██░░███░░██░░░░░░░██");
+                    Console.WriteLine("██░░░░░░░░██░░░░░██░░░░░░░░██");
+                    Console.WriteLine("██░░░░░░░░░███████░░░░░░░░░██");
+                    Console.WriteLine("─██░░░░░░░░░░░░░░░░░░░░░░░██─");
+                    Console.WriteLine("──██░░░░░░░░░░░░░░░░░░░░░██──");
+                    Console.WriteLine("───██░░░░░░░░░░░░░░░░░░░██───");
+                    Console.WriteLine("────███░░░░░░░░░░░░░░░███────");
+                    Console.WriteLine("─────▀███░░░░░░░░░░░███▀─────");
+                    Console.WriteLine("────────▀███████████▀────────");
+
+
+                }
+            
                 SpeakingConsole.WriteLine("Trainers Name: " + battleBot.Name + ",");
 
                 // Color Desiders
@@ -384,7 +419,7 @@ namespace BattleBots
                 SpeakingConsole.WriteLine("Your pokemon has lost. Do you want to play again?");
                 if (SpeakingConsole.ReadLine().Trim().ToLower()[0] == 'y')
                 {
-                    battleBot = PromptUserForBot();
+                    battleBot = PromptUserForBot(battleBot.HighScore);
                     Battle(ref battleBot);
                 }
             }
