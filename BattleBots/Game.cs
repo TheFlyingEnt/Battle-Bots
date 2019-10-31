@@ -41,11 +41,15 @@ namespace BattleBots
         System.Media.SoundPlayer MeetOakSFX = new System.Media.SoundPlayer(GameR.Pokemon_MeetingOak);
         System.Media.SoundPlayer PokeBallOpenSFX = new System.Media.SoundPlayer(GameR.PokeBall);
 
-        System.Media.SoundPlayer PikaChuSFX = new System.Media.SoundPlayer(GameR.Thunderbolt_Pikachu);
-        System.Media.SoundPlayer BulbaSFX = new System.Media.SoundPlayer(GameR.VineWhip_Bluba);
-        System.Media.SoundPlayer GeodudeSFX = new System.Media.SoundPlayer(GameR.RockTomb_GeoDude);
-        System.Media.SoundPlayer CharSFX = new System.Media.SoundPlayer(GameR.Flamethrower_Charmader);
-        System.Media.SoundPlayer SquirtSFX = new System.Media.SoundPlayer(GameR.BubbleBeam_Squart);
+        static System.Media.SoundPlayer pikachuSound = new System.Media.SoundPlayer(GameR.Thunderbolt_Pikachu);
+        static System.Media.SoundPlayer bulbasaurSound = new System.Media.SoundPlayer(GameR.VineWhip_Bluba);
+        static System.Media.SoundPlayer geodudeSound = new System.Media.SoundPlayer(GameR.RockTomb_GeoDude);
+        static System.Media.SoundPlayer charamanderSound = new System.Media.SoundPlayer(GameR.Flamethrower_Charmader);
+        static System.Media.SoundPlayer squirtleSound = new System.Media.SoundPlayer(GameR.BubbleBeam_Squart);
+
+
+        
+        
 
 
         private bool blnIsBattleSoundPlaying = false;
@@ -68,6 +72,7 @@ namespace BattleBots
         {
             OpenSFX.Play();
             // Plays Sound
+            Console.WriteLine("\n Version 42.069");
             Console.WriteLine("\n Copyright (©) The Pokemon Company 2019");
             Console.WriteLine("\n Copyright (©) Nintendo 2019");
             Console.WriteLine("\n Copyright (©) MrLettsGiveUseAnA.Inc 2019\n");
@@ -84,7 +89,7 @@ namespace BattleBots
             Console.WriteLine("\n Press Enter...");
             Console.ReadLine();
 
-            SpeakingConsole.WriteLine("\n ...");
+            Console.WriteLine("\n ...");
             Console.ReadLine();
             SpeakingConsole.WriteLine("\n  Opps, Wrong Program..");
             Console.ReadLine();
@@ -246,6 +251,7 @@ namespace BattleBots
                                 {
                                     battleBot.GainPoints(rGen.Next(6, 11));
                                     SpeakingConsole.WriteLine("You have critically destroyed your opponent!!");
+                                   
                                     //////////////////////////////////
                                     ///////////////////////////////////
                                     /////////////////////////////////
@@ -316,6 +322,18 @@ namespace BattleBots
                             }
                             break;
                     }
+
+                    if (blnValidAction)
+                    {
+                        GetSoundForWeapon(battleBot.Weapon).PlaySync();
+                        BattleSFX.Play();
+                    }
+
+
+
+
+
+
 
                 }
                 Thread.Sleep(1000);
@@ -447,7 +465,23 @@ namespace BattleBots
             return false;
         }
 
-
+        private static SoundPlayer GetSoundForWeapon(string weapon)
+        {
+            switch (weapon)
+            {
+                case WEAPON_CIRCULAR_SAW:
+                    return pikachuSound;
+                case WEAPON_CLAW_CUTTER:
+                    return squirtleSound;
+                case WEAPON_FLAME_THROWER:
+                    return charamanderSound;
+                case WEAPON_SLEDGE_HAMMER:
+                    return bulbasaurSound;
+                case WEAPON_SPINNNING_BLADE:
+                    return geodudeSound;
+            }
+            return null;
+        }
 
 
 
